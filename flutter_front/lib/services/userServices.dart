@@ -16,7 +16,8 @@ class UserServices{
 
   Future<void> deleteUsers(String name) async {
     var client = http.Client();
-    Uri.parse('http://localhost:5432/api/users/delete/$name');
+    var uri = Uri.parse('http://localhost:5432/api/users/delete/$name');
+    await client.delete(uri);
   }
 
 }

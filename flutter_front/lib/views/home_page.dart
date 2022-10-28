@@ -59,6 +59,8 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () { 
                       deleteU(users![index].name.toString());
                       debugPrint(users![index].name.toString());
+                      Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomePage()));
                     },
                   ),
                   onTap: () {
