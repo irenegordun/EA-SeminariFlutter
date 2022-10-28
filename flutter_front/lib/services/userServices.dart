@@ -13,4 +13,10 @@ class UserServices{
     }
     return null;
   }
+
+  Future<void> deleteUsers(String name) async {
+    var client = http.Client();
+    Uri.parse('http://localhost:5432/api/users/delete/$name');
+  }
+
 }

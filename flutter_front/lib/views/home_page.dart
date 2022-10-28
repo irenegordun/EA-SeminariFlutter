@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
 import 'package:flutter_front/views/deleteUser_page.dart';
+import 'package:http/http.dart';
 
 import '../models/user.dart';
 
@@ -29,6 +30,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  deleteU(String name) async {
+    await UserServices().deleteUsers(name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +54,13 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text(users![index].name),
                   subtitle: Text(users![index].email),
+                  trailing: IconButton(
+                    icon:  Icon(Icons.delete), 
+                    onPressed: () { 
+                      deleteU(users![index].name.toString());
+                      debugPrint(users![index].name.toString());
+                    },
+                  ),
                   onTap: () {
                     Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => DeleteUser()));
