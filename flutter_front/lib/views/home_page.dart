@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
 import 'package:flutter_front/views/deleteUser_page.dart';
-import 'package:http/http.dart';
 
 import '../models/user.dart';
+import '../widgets/drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
         title: const Text('Seminari 10 Fluter LLISTAT'),
         backgroundColor: Colors.deepPurple[300], 
@@ -49,18 +50,19 @@ class _HomePageState extends State<HomePage> {
         child: ListView.builder(
           itemCount: users?.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
+            return Card(
+              color: Colors.deepPurple[100],
+              child:
                 ListTile(
                   title: Text(users![index].name),
                   subtitle: Text(users![index].email),
                   trailing: IconButton(
-                    icon:  Icon(Icons.delete), 
+                    icon: const Icon(Icons.delete), 
                     onPressed: () { 
                       deleteU(users![index].name.toString());
-                      debugPrint(users![index].name.toString());
-                      Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                      setState(() {
+                        users!.removeAt(index);
+                      });
                     },
                   ),
                   onTap: () {
@@ -68,8 +70,6 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(builder: (context) => DeleteUser()));
                   },
                 ),
-                const Divider()
-              ],
             );
           },
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
 
 import '../models/user.dart';
+import '../widgets/drawer.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -20,6 +21,7 @@ class _AccountPage extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
         title: const Text('Seminari 10 Fluter REGISTER'),
         backgroundColor: Colors.deepPurple[300], 
@@ -31,19 +33,19 @@ class _AccountPage extends State<AccountPage> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(labelText: "Name"),
+                decoration: const InputDecoration(labelText: "Name"),
                 onSaved: (value){
                   name = value!;
                 },
               ),
               TextFormField(
-                decoration : InputDecoration (labelText: "password"),
+                decoration : const InputDecoration (labelText: "password"),
                 onSaved: (value){
                  password = value!;
                 },
               ),
               TextFormField(
-                decoration : InputDecoration (labelText: "mail"),
+                decoration : const InputDecoration (labelText: "mail"),
                 onSaved: (value){
                   mail = value!;
                 },
@@ -52,7 +54,7 @@ class _AccountPage extends State<AccountPage> {
               onPressed: () {
                 //funció per registrar
               },
-              backgroundColor: Color.fromARGB(255, 9, 51, 85),
+              backgroundColor: const Color.fromARGB(255, 9, 51, 85),
               tooltip: 'Send',
               child: const Icon (Icons.navigation),
             ),
