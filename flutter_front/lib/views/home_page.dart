@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
-import 'package:flutter_front/views/deleteUser_page.dart';
+import 'package:flutter_front/views/UpdateUser_page.dart';
 
 import '../models/user.dart';
 import '../widgets/drawer.dart';
@@ -56,19 +56,31 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text(users![index].name),
                   subtitle: Text(users![index].email),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete), 
-                    onPressed: () { 
-                      deleteU(users![index].name.toString());
-                      setState(() {
-                        users!.removeAt(index);
-                      });
-                    },
+                  trailing: Container(
+                    width: 120,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(child:IconButton(
+                        icon: const Icon(Icons.delete), 
+                        onPressed: () { 
+                          deleteU(users![index].name.toString());
+                          setState(() {users!.removeAt(index);});
+                        },
+                      )),
+                     
+                      Expanded(child:IconButton(
+                        icon: const Icon(Icons.edit), 
+                        onPressed: () { 
+                          Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const UpdateUser()));
+                         }, 
+                       ),
+                    ),
+                    
+                      ],
+                    )
+
                   ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DeleteUser()));
-                  },
                 ),
             );
           },

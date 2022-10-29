@@ -13,7 +13,11 @@ class AccountPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         drawer: const DrawerScreen(),
-        appBar: AppBar(title: const Text("EA - Flutter Form")),
+        appBar: AppBar(
+          title: const Text("EA - Flutter Form"),
+          backgroundColor: Colors.deepPurple[300], 
+        ),
+        
         body: const FormWidget(),
       ),
     );
