@@ -14,18 +14,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<User>? users;
-  var isLoaded=false;
+  var isLoaded = false;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     getData();
   }
 
   getData() async {
     users = await UserServices().getUsers();
-    if(users != null){
+    if (users != null) {
       setState(() {
-        isLoaded=true;
+        isLoaded = true;
       });
     }
   }
@@ -40,40 +40,84 @@ class _HomePageState extends State<HomePage> {
       drawer: const DrawerScreen(),
       appBar: AppBar(
         title: const Text('Seminari 10 Fluter LLISTAT'),
-        backgroundColor: Colors.deepPurple[300], 
+        backgroundColor: Colors.deepPurple[300],
       ),
       body: Visibility(
         visible: isLoaded,
-        replacement:const Center(
+        replacement: const Center(
           child: CircularProgressIndicator(),
         ),
         child: ListView.builder(
           itemCount: users?.length,
           itemBuilder: (context, index) {
-            return Card(
-              color: Colors.deepPurple[100],
-              child:
-                ListTile(
-                  title: Text(users![index].name),
-                  subtitle: Text(users![index].email),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete), 
-                    onPressed: () { 
-                      deleteU(users![index].name.toString());
-                      setState(() {
-                        users!.removeAt(index);
-                      });
-                    },
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DeleteUser()));
+            return InkWell(
+              child: ListTile(
+                title: Text(users![index].name),
+                subtitle: Text(users![index].email),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () {
+                    deleteU(users![index].name.toString());
+                    setState(() {
+                      users!.removeAt(index);
+                    });
                   },
                 ),
+                onTap: () {
+                  showDialogFunc(context, users![index].name,
+                      users![index].email, users![index].id);
+                },
+              ),
             );
           },
         ),
       ),
     );
   }
+}
+
+showDialogFunc(context, name, email, id) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: Material(
+            type: MaterialType.transparency,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.all(15),
+              width: MediaQuery.of(context).size.width,
+              height: 120,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "NAME : " + name,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "EMAIL : " + email,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      " ID : " + id,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ]),
+            ),
+          ),
+        );
+      });
 }

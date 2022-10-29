@@ -16,10 +16,9 @@ class _DeleteUser extends State<DeleteUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Seminari 10 Fluter DELETEUSER'),
-        backgroundColor: Colors.deepPurple[300], 
+        title: const Text('Detail User'),
+        backgroundColor: Colors.deepPurple[300],
       ),
-  );
-
+    );
   }
 }
