@@ -10,8 +10,9 @@ String userToJson(List<User> data) => json.encode(List<dynamic>.from(data.map((x
 
 class User {
     User({
-        this.id = "", // non nullable but optional with a default value
+        //this.id = "", // non nullable but optional with a default value
         required this.name,
+        required this.id,
         required this.password,
         required this.email,
         
