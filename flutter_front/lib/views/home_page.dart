@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
-import 'package:flutter_front/views/deleteUser_page.dart';
 
 import '../models/user.dart';
 import '../widgets/drawer.dart';
@@ -86,34 +85,42 @@ showDialogFunc(context, name, email, id) {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
+                color: Color.fromARGB(255, 186, 179, 230),
               ),
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width,
               height: 120,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
+                      "USER DETAILS:",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 49, 66,86),
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text(
                       "NAME : " + name,
                       style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 49, 66, 86),
+                      ),
                     ),
                     Text(
                       "EMAIL : " + email,
                       style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 49, 66, 86),
+                          ),
                     ),
                     Text(
                       " ID : " + id,
                       style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 49, 66, 86),
+                          ),
                     )
                   ]),
             ),
