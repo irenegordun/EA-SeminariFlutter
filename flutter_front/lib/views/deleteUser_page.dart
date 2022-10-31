@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_front/services/userServices.dart';
+import '../widgets/drawer.dart';
 
-import '../models/user.dart';
 
 class DeleteUser extends StatefulWidget {
   const DeleteUser({super.key});
@@ -12,14 +11,44 @@ class DeleteUser extends StatefulWidget {
 }
 
 class _DeleteUser extends State<DeleteUser> {
+  List<String> values=[
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+    'assets/image1.jpg',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text('Seminari 10 Fluter DELETEUSER'),
+        title: const Text('Seminari 10 Fluter'),
         backgroundColor: Colors.deepPurple[300], 
       ),
-  );
-
+      body: Container(
+        child: 
+        GridView.builder(
+          itemCount: 12,
+          itemBuilder: (context, index){
+            return Card(
+              elevation: 10, 
+              child: Center(
+                child: Image.asset(values[index]),
+              ),
+            );
+          },
+          gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+        ),
+      ),
+    );
   }
 }
