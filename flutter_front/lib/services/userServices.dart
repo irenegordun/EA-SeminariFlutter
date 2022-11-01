@@ -30,17 +30,13 @@ class UserServices {
         headers: {'content-type': 'application/json'}, body: userJS);
   }
 
-  Future<bool> updateUser(
-      //preguntar com pasar aquesta informacios
-      String name1,
-      String email1,
-      String pass1,
-      String newpass1) async {
+  Future<bool> updateUser(User user) async {
     var client = http.Client();
-    var uri = Uri.parse('http://localhost:5432/api/users//update/$name1');
-    var response = await client.put(uri, headers: {
-      'content-type': 'application/json'
-    }); //body: jsonEncode(newemail: email1, password: pass1, newpassword: newpass1));
+    var name = user.name;
+    var uri = Uri.parse('http://localhost:5432/api/users//update/$name');
+    var userJS = json.encode(user.toJson());
+    var response = await client.put(uri,
+        headers: {'content-type': 'application/json'}, body: userJS);
     if (response.statusCode == 200) {
       var json = response.body;
       return true;

@@ -7,7 +7,7 @@ const register = async (req: Request, res: Response) => {
 	const name = req.body.name;
 	const email = req.body.email;
 	const password = CryptoJS.AES.encrypt(req.body.password, 'secret key 123').toString();
-	const newUser = new User({ name, password , email});
+	const newUser = new User({ name, password, email });
 	await newUser.save();
 	const token = jwt.sign({ id: newUser._id }, 'yyt#KInN7Q9X3m&$ydtbZ7Z4fJiEtA6uHIFzvc@347SGHAjV4E', {
 		expiresIn: 60 * 60 * 24
@@ -15,7 +15,7 @@ const register = async (req: Request, res: Response) => {
 	res.status(200).json({ auth: true, token });
 };
 
-const login = async (req: Request, res : Response) => {
+const login = async (req: Request, res: Response) => {
 	const user = await User.findOne({ email: req.body.email });
 	if (!user) {
 		return res.status(404).send('The email does not exist');
@@ -53,14 +53,14 @@ const changePass = async (req: Request, res: Response) => {
 	if (!user) {
 		return res.status(404).send('No user found.');
 	}
-	if(req.body.password === CryptoJS.AES.decrypt(user.password, 'secret key 123').toString(CryptoJS.enc.Utf8)){
+	if (req.body.password === CryptoJS.AES.decrypt(user.password, 'secret key 123').toString(CryptoJS.enc.Utf8)) {
 		let newpassword = req.body.newpassword;
 		newpassword = CryptoJS.AES.encrypt(newpassword, 'secret key 123').toString();
 		user.password = newpassword;
 		await user.save();
 		res.json({ status: 'User Updated' });
 	}
-	else{
+	else {
 		res.json({ status: 'Wrong password' });
 	}
 };
@@ -72,7 +72,7 @@ const remove = async (req: Request, res: Response) => {
 		// await User.deleteOne(user);
 		res.status(200).json({ status: 'User deleted' });
 	}
-	catch(err) {
+	catch (err) {
 		res.status(500).json({ message: 'User not found', err });
 	}
 };
@@ -82,18 +82,13 @@ const updateUser = async (req: Request, res: Response) => {
 		if (!user) {
 			return res.status(404).send('No user found.');
 		}
-		if (req.body.password === CryptoJS.AES.decrypt(user.password, 'secret key 123').toString(CryptoJS.enc.Utf8)) {
-			let newpassword = req.body.newpassword;
-			const newemail = req.body.email;
-			newpassword = CryptoJS.AES.encrypt(newpassword, 'secret key 123').toString();
-			user.password = newpassword;
-			user.email = newemail;
-			await user.save();
-			res.json({ status: 'User Updated' });
-		}
-		else {
-			res.json({ status: 'Wrong password' });
-		}
+		let newpassword = req.body.password;
+		const newemail = req.body.email;
+		newpassword = CryptoJS.AES.encrypt(newpassword, 'secret key 123').toString();
+		user.password = newpassword;
+		user.email = newemail;
+		await user.save();
+		res.json({ status: 'User Updated' });
 	}
 	catch (err) {
 		res.status(500).json({ message: 'User not found', err });
@@ -108,5 +103,6 @@ export default {
 	getall,
 	getone,
 	changePass,
-	remove
+	remove,
+	updateUser
 };

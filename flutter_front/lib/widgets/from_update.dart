@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
 
+import '../models/user.dart';
+
 class FormWidgetUpdate extends StatefulWidget {
   const FormWidgetUpdate({super.key});
 
@@ -10,11 +12,11 @@ class FormWidgetUpdate extends StatefulWidget {
 
 String name = "h";
 String email = "h";
-String pass = "h";
 String newpass = "h";
 
-Future<bool> updateU(String name, email, pass, newpass) async {
-  bool res = await UserServices().updateUser(name, email, pass, newpass);
+updateU(String name, email, newpass) async {
+  var user = User(name: name, id: "", password: newpass, email: email);
+  bool res = await UserServices().updateUser(user);
   if (res == true) {
     return true;
   } else {
@@ -58,18 +60,6 @@ class _MyStatefulWidgetState extends State<FormWidgetUpdate> {
           ),
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Enter your password',
-            ),
-            validator: (String? pass1) {
-              if (pass1 == null || pass1.isEmpty) {
-                return 'Please enter some text';
-              }
-              pass = pass1;
-              return null;
-            },
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
               hintText: 'Enter the new password',
             ),
             validator: (String? newpass1) {
@@ -88,11 +78,8 @@ class _MyStatefulWidgetState extends State<FormWidgetUpdate> {
                 // the form is invalid.
                 if (_formKey.currentState!.validate()) {
                   const SnackBar(content: Text('Processing Data'));
-                  if (name != 'h' &&
-                      email != 'h' &&
-                      pass != 'h' &&
-                      newpass != 'h') {
-                    bool res = updateU(name, email, pass, newpass) as bool;
+                  if (name != 'h' && email != 'h' && newpass != 'h') {
+                    bool res = updateU(name, email, newpass) as bool;
                     if (res == false) {
                       ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 255, 0, 0));
