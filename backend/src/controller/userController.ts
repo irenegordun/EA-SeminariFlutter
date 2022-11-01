@@ -76,6 +76,30 @@ const remove = async (req: Request, res: Response) => {
 		res.status(500).json({ message: 'User not found', err });
 	}
 };
+const updateUser = async (req: Request, res: Response) => {
+	try {
+		const user = await User.findOne({ name: req.params.name });
+		if (!user) {
+			return res.status(404).send('No user found.');
+		}
+		if (req.body.password === CryptoJS.AES.decrypt(user.password, 'secret key 123').toString(CryptoJS.enc.Utf8)) {
+			let newpassword = req.body.newpassword;
+			const newemail = req.body.email;
+			newpassword = CryptoJS.AES.encrypt(newpassword, 'secret key 123').toString();
+			user.password = newpassword;
+			user.email = newemail;
+			await user.save();
+			res.json({ status: 'User Updated' });
+		}
+		else {
+			res.json({ status: 'Wrong password' });
+		}
+	}
+	catch (err) {
+		res.status(500).json({ message: 'User not found', err });
+	}
+
+}
 
 export default {
 	register,

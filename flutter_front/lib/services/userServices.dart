@@ -4,13 +4,12 @@ import 'dart:math';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
 
-class UserServices{
-
+class UserServices {
   Future<List<User>?> getUsers() async {
     var client = http.Client();
     var uri = Uri.parse('http://localhost:5432/api/users');
     var response = await client.get(uri);
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       var json = response.body;
       return userFromJson(json);
     }
@@ -22,14 +21,31 @@ class UserServices{
     var uri = Uri.parse('http://localhost:5432/api/users/delete/$name');
     await client.delete(uri);
   }
+
   Future<void> createUser(User user) async {
-  var client = http.Client();
-  var uri = Uri.parse('http://localhost:5432/api/users/register');
-  var userJS = json.encode(user.toJson());
-  await client.post(uri, 
-  headers: {'content-type': 'application/json'},
-  body: userJS);
-  
+    var client = http.Client();
+    var uri = Uri.parse('http://localhost:5432/api/users/register');
+    var userJS = json.encode(user.toJson());
+    await client.post(uri,
+        headers: {'content-type': 'application/json'}, body: userJS);
   }
 
+  Future<bool> updateUser(
+      //preguntar com pasar aquesta informacios
+      String name1,
+      String email1,
+      String pass1,
+      String newpass1) async {
+    var client = http.Client();
+    var uri = Uri.parse('http://localhost:5432/api/users//update/$name1');
+    var response = await client.put(uri, headers: {
+      'content-type': 'application/json'
+    }); //body: jsonEncode(newemail: email1, password: pass1, newpassword: newpass1));
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
