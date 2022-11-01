@@ -66,11 +66,13 @@ class _HomePageState extends State<ListPage> {
                               showDialogFunc(context, users![index].name,
                                   users![index].email, users![index].id);
                             },
+                            tooltip: 'Details',
                           ),
                         ),
                         Expanded(
                           child: IconButton(
-                            icon: const Icon(Icons.article),
+                            icon: const Icon(Icons.home),
+                            tooltip: 'Main',
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const FirstPage()));
@@ -80,6 +82,7 @@ class _HomePageState extends State<ListPage> {
                         Expanded(
                             child: IconButton(
                           icon: const Icon(Icons.delete),
+                          tooltip: 'Delete',
                           onPressed: () {
                             deleteU(users![index].name.toString());
                             setState(() {
