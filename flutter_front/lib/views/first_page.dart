@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
 
 
-class DeleteUser extends StatefulWidget {
-  const DeleteUser({super.key});
+class FirstPage extends StatefulWidget {
+  const FirstPage({super.key});
 
   @override
-  State<DeleteUser> createState() => _DeleteUser();
+  State<FirstPage> createState() => _FirstPage();
 }
 
-class _DeleteUser extends State<DeleteUser> {
+class _FirstPage extends State<FirstPage> {
   List<String> values=[
     'assets/image1.jpg',
     'assets/image1.jpg',
@@ -33,8 +33,15 @@ class _DeleteUser extends State<DeleteUser> {
         title: const Text('Seminari 10 Fluter'),
         backgroundColor: Colors.deepPurple[300], 
       ),
-      body: Container(
-        child: 
+      body: Column(
+        children: <Widget>[ 
+         Card(
+              color: Colors.deepPurple[100],
+              child: const ListTile(
+                title: Text('hello'),
+              ),
+         ),
+        Expanded(child: 
         GridView.builder(
           itemCount: 12,
           itemBuilder: (context, index){
@@ -48,6 +55,8 @@ class _DeleteUser extends State<DeleteUser> {
           gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
         ),
+        ),
+        ],
       ),
     );
   }

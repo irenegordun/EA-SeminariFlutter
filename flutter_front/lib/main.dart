@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_front/views/deleteUser_page.dart';
-import 'package:flutter_front/views/home_page.dart';
+import 'package:flutter_front/views/first_page.dart';
 
 
 void main() {
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: DeleteUser(),
+      home: FirstPage(),
     );
   }
 }

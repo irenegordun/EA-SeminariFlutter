@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_front/views/deleteUser_page.dart';
-import 'package:flutter_front/views/home_page.dart';
+import 'package:flutter_front/views/first_page.dart';
+import 'package:flutter_front/views/list_page.dart';
 import 'package:flutter_front/views/account_page.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -31,7 +31,7 @@ class DrawerScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                    MaterialPageRoute(builder: (context) => const ListPage()));
                 },
               ),
               ListTile(
@@ -41,7 +41,7 @@ class DrawerScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => AccountPage()));
+                    MaterialPageRoute(builder: (context) => const AccountPage()));
                 },
               ),
               ListTile(
@@ -51,7 +51,7 @@ class DrawerScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => DeleteUser()));
+                    MaterialPageRoute(builder: (context) => const FirstPage()));
                 },
               )
           ],

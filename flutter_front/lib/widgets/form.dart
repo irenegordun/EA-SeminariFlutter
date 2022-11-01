@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/models/user.dart';
-import 'package:flutter_front/views/home_page.dart';
+import 'package:flutter_front/views/list_page.dart';
 import '../services/userServices.dart';
 
 
@@ -84,7 +84,6 @@ class _MyStatefulWidgetState extends State<FormWidget> {
             ),
           ),
           TextButton(onPressed: (){
-
             setState (() async {
               String formName = nameController.text.toString();
               print(formName);
@@ -99,7 +98,7 @@ class _MyStatefulWidgetState extends State<FormWidget> {
               var user = User(name: formName, id: "", password: formPassword, email: formEmail);
               await UserServices().createUser(user);
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => HomePage())
+                MaterialPageRoute(builder: (context) => const ListPage())
               );
             });
             
