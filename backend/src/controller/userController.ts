@@ -108,5 +108,6 @@ export default {
 	getall,
 	getone,
 	changePass,
-	remove
+	remove,
+	updateUser
 };
