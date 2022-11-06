@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_front/services/userServices.dart';
 import 'package:flutter_front/views/first_page.dart';
+import 'package:flutter_front/views/user_info.dart';
+import 'package:provider/provider.dart';
 
 import '../models/user.dart';
 import '../widgets/drawer.dart';
@@ -34,8 +36,13 @@ class _HomePageState extends State<ListPage> {
     await UserServices().deleteUsers(name);
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+      UserServices _userprovider = Provider.of<UserServices>(context);
+
+
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
@@ -63,8 +70,13 @@ class _HomePageState extends State<ListPage> {
                           child: IconButton(
                             icon: const Icon(Icons.article),
                             onPressed: () {
+                              _userprovider.setUserData(users![index]);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const UserInfo()));
+                              /*
                               showDialogFunc(context, users![index].name,
-                                  users![index].email, users![index].id);
+                              users![index].email, users![index].id);
+                            */
                             },
                             tooltip: 'Details',
                           ),
