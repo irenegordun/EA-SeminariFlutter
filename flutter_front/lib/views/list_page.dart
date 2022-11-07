@@ -70,13 +70,8 @@ class _HomePageState extends State<ListPage> {
                           child: IconButton(
                             icon: const Icon(Icons.article),
                             onPressed: () {
-                              _userprovider.setUserData(users![index]);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const UserInfo()));
-                              /*
                               showDialogFunc(context, users![index].name,
                               users![index].email, users![index].id);
-                            */
                             },
                             tooltip: 'Details',
                           ),
@@ -100,6 +95,16 @@ class _HomePageState extends State<ListPage> {
                             setState(() {
                               users!.removeAt(index);
                             });
+                          },
+                        )),
+                        Expanded(
+                            child: IconButton(
+                          icon: const Icon(Icons.info_outline),
+                          tooltip: 'More Info',
+                          onPressed: () {
+                             _userprovider.setUserData(users![index]);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const UserInfo()));
                           },
                         )),
                       ],
