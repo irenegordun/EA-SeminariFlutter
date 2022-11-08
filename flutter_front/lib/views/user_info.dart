@@ -26,12 +26,7 @@ class _UserPageState extends State<UserInfo> {
         title: const Text('Seminari 10 Fluter LLISTAT'),
         backgroundColor: Colors.deepPurple[300],
       ),
-      body:  /*Visibility(
-        visible: isLoaded,
-        replacement: const Center(
-          child: CircularProgressIndicator(),
-        ),
-        child:*/ Container(
+      body:   Container(
           width: 900,
           height: 701,
           child: Column(
